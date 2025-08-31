@@ -64,7 +64,7 @@ func (this *MySlience[T]) Insert(index int, value T) error {
 		this.resize(2 * cap)
 	}
 	// 迁移数据 data[index..] -> data[index+1..]
-	for i := this.size; i >= index; i-- {
+	for i := this.size - 1; i >= index; i-- { // TODO: *****
 		this.data[i+1] = this.data[i]
 	}
 	// 插入元素
@@ -94,14 +94,14 @@ func (this *MySlience[T]) Remove(index int) (T, error) {
 	}
 	deleteVal := this.data[index]
 	// 删除最后一个元素
-	if this.size == index {
+	if this.size == index { // TODO: ****
 		this.data[this.size-1] = empT
 		this.size--
 		return deleteVal, nil
 	}
 
 	// 迁移数据
-	for i := index + 1; i < this.size; i++ {
+	for i := index + 1; i < this.size; i++ { // TODO: ***
 		this.data[i-1] = this.data[i]
 	}
 	this.data[this.size-1] = empT
@@ -200,7 +200,14 @@ func main() {
 		arr.Append(i)
 	}
 	fmt.Println(arr)
-	v, err := arr.Remove(5)
+	v, err := arr.Remove(5) // 删除的值: 5 <nil>
+	//v, err := arr.Remove(6)  // 删除的值: 0 索引位置不存在元素, Input Index: 6, MySlience size: 6
 	fmt.Println("删除的值:", v, err)
+	fmt.Println(arr)
+	arr.AddFirst(100)
+	fmt.Println(arr)
+	arr.AddFirst(101)
+	fmt.Println(arr)
+	arr.RemoveLast()
 	fmt.Println(arr)
 }
