@@ -1,2 +1,2 @@
-# golang-algorithm
-golang语言学习数据结构与算法
+# algorithm
+数据结构与算法学习
